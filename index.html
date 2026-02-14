@@ -1,0 +1,2075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DecorRocket - AI-Ready Digital Audit for Interior Designers in Hyderabad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Dark Theme (Default) */
+            --primary: #FF6B35;
+            --secondary: #F7931E;
+            --accent: #C71585;
+            --dark: #1A1A2E;
+            --surface: #16213E;
+            --surface-light: #0F3460;
+            --text: #E8E8E8;
+            --text-dim: #94A3B8;
+            --gold: #FFD700;
+            --accent-glow: rgba(255, 107, 53, 0.2);
+        }
+
+        [data-theme="light"] {
+            /* Light Theme */
+            --primary: #FF6B35;
+            --secondary: #F7931E;
+            --accent: #C71585;
+            --dark: #FFFFFF;
+            --surface: #F8F9FA;
+            --surface-light: #FFFFFF;
+            --text: #1A1A2E;
+            --text-dim: #64748B;
+            --gold: #F7931E;
+            --accent-glow: rgba(255, 107, 53, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Animated gradient background - Indian-inspired */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(247, 147, 30, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(199, 21, 133, 0.08) 0%, transparent 50%);
+            z-index: -1;
+            animation: backgroundShift 15s ease-in-out infinite;
+            transition: opacity 0.3s ease;
+        }
+
+        [data-theme="light"] body::before {
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(247, 147, 30, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(199, 21, 133, 0.04) 0%, transparent 50%);
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0 6rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            background: rgba(255, 107, 53, 0.15);
+            border: 1px solid rgba(255, 107, 53, 0.4);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .hero-badge::before {
+            content: '⚡';
+            font-size: 1rem;
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #C71585 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        /* Audit Form */
+        .audit-card {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .audit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .form-section {
+            margin-bottom: 3rem;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            background: var(--surface-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="light"] input[type="text"],
+        [data-theme="light"] input[type="email"],
+        [data-theme="light"] input[type="tel"],
+        [data-theme="light"] select {
+            border: 1px solid #E2E8F0;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        input::placeholder {
+            color: var(--text-dim);
+        }
+
+        .question-card {
+            background: var(--surface-light);
+            border-radius: 16px;
+            padding: 1.8rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="light"] .question-card {
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-card:hover {
+            border-color: rgba(255, 107, 53, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .question-text {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text);
+            flex: 1;
+            padding-right: 1rem;
+        }
+
+        .category-badge {
+            background: rgba(255, 107, 53, 0.2);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            position: relative;
+        }
+
+        .radio-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .radio-label {
+            display: block;
+            padding: 0.7rem 1.5rem;
+            background: var(--dark);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .radio-option input[type="radio"]:checked + .radio-label {
+            background: rgba(255, 107, 53, 0.2);
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .radio-label:hover {
+            border-color: rgba(255, 107, 53, 0.6);
+        }
+
+        /* Progress bar */
+        .progress-container {
+            margin-bottom: 2rem;
+            background: var(--dark);
+            border-radius: 50px;
+            height: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 50px;
+            width: 0%;
+            transition: width 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 14px;
+            color: #FFFFFF;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.02em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Results Section */
+        .results {
+            display: none;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .results.visible {
+            display: block;
+        }
+
+        .score-display {
+            text-align: center;
+            padding: 3rem;
+            background: var(--surface-light);
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .score-display::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .score-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+
+        .score-label {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            font-weight: 600;
+            margin-top: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-scores {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-score-card {
+            background: var(--surface-light);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .category-score-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .category-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .category-score-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .category-bar {
+            height: 8px;
+            background: var(--dark);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .category-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        .recommendations {
+            background: var(--surface-light);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+        }
+
+        .recommendations h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .recommendation-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            padding: 1rem;
+            background: var(--dark);
+            border-radius: 12px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .recommendation-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .recommendation-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .recommendation-text {
+            color: var(--text);
+        }
+
+        .download-btn {
+            width: 100%;
+            padding: 1.2rem 2rem;
+            background: var(--surface-light);
+            border: 2px solid var(--primary);
+            border-radius: 14px;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .download-btn:hover {
+            background: var(--primary);
+            color: #FFFFFF;
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .audit-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .question-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .radio-group {
+                flex-direction: column;
+            }
+
+            .score-number {
+                font-size: 4rem;
+            }
+        }
+
+        .ai-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(199, 21, 133, 0.2);
+            border: 1px solid rgba(199, 21, 133, 0.4);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-top: 1rem;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Gap Analysis Section */
+        .gap-analysis {
+            background: var(--surface-light);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .gap-analysis h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .gap-analysis h3::before {
+            content: '⚠️';
+            font-size: 1.5rem;
+        }
+
+        .gap-item {
+            background: var(--dark);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="light"] .gap-item {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+        }
+
+        .gap-item:hover {
+            transform: translateX(5px);
+        }
+
+        .gap-item.critical {
+            border-left-color: #EF4444;
+        }
+
+        .gap-item.moderate {
+            border-left-color: #F59E0B;
+        }
+
+        .gap-item.minor {
+            border-left-color: #10B981;
+        }
+
+        .gap-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .gap-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text);
+        }
+
+        .gap-severity {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .gap-severity.critical {
+            background: rgba(239, 68, 68, 0.2);
+            color: #EF4444;
+        }
+
+        .gap-severity.moderate {
+            background: rgba(245, 158, 11, 0.2);
+            color: #F59E0B;
+        }
+
+        .gap-severity.minor {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10B981;
+        }
+
+        .gap-description {
+            color: var(--text-dim);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .gap-impact {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .gap-impact::before {
+            content: '💰';
+        }
+
+        /* AI-Powered Insights */
+        .ai-insights {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(247, 147, 30, 0.1));
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-insights::before {
+            content: '🤖';
+            position: absolute;
+            right: 2rem;
+            top: 2rem;
+            font-size: 4rem;
+            opacity: 0.1;
+        }
+
+        .ai-insights h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .ai-insight-text {
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .insight-highlight {
+            background: rgba(255, 107, 53, 0.2);
+            color: var(--primary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* Revenue Impact Section */
+        .revenue-impact {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .impact-card {
+            background: var(--dark);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        [data-theme="light"] .impact-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+        }
+
+        .impact-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .impact-label {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* Registration CTA Section */
+        .registration-cta {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .registration-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 15s linear infinite;
+        }
+
+        .registration-cta h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            color: #FFFFFF;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .registration-cta p {
+            font-size: 1.2rem;
+            color: #FFFFFF;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .register-btn {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: #FFFFFF;
+            color: var(--primary);
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .benefit-card {
+            background: var(--surface-light);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 107, 53, 0.5);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+        }
+
+        .benefit-description {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Comparison Table */
+        .comparison-section {
+            background: var(--surface-light);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .comparison-section h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--text);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 700;
+            border-bottom: 2px solid rgba(255, 107, 53, 0.3);
+            color: var(--text);
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-dim);
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(255, 107, 53, 0.05);
+        }
+
+        .check-icon {
+            color: #10B981;
+            font-weight: bold;
+        }
+
+        .cross-icon {
+            color: #EF4444;
+            font-weight: bold;
+        }
+
+        /* Location-specific styling */
+        .hyderabad-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background: rgba(247, 147, 30, 0.15);
+            border: 1px solid rgba(247, 147, 30, 0.4);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .hyderabad-badge::before {
+            content: '📍';
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            background: var(--surface);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: var(--text);
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        [data-theme="light"] .theme-toggle {
+            border: 2px solid #E2E8F0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+        }
+
+        .theme-icon {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle Button -->
+    <div class="theme-toggle" id="themeToggle">
+        <span class="theme-icon" id="themeIcon">🌙</span>
+        <span id="themeText">Dark</span>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="logo">DecorRocket</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero-badge">
+                <span class="status-indicator"></span>
+                AI-First Digital Platform
+            </div>
+            <div class="hyderabad-badge">Serving Interior Designers in Hyderabad</div>
+            <h1>
+                Transform Your<br>
+                <span class="gradient-text">Interior Design Business</span>
+            </h1>
+            <p class="hero-subtitle">
+                Take our comprehensive AI-powered audit designed specifically for Hyderabad's interior designers. Discover where you stand digitally and unlock growth opportunities in minutes.
+            </p>
+        </section>
+
+        <!-- Audit Form -->
+        <section class="audit-card" id="auditForm">
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="progress-text" id="progressText">0% Complete</div>
+
+            <form id="auditFormElement">
+                <!-- Designer Information -->
+                <div class="form-section">
+                    <h2 class="section-title">Your Information</h2>
+                    <div class="form-group">
+                        <label for="designerName">Designer Name *</label>
+                        <input type="text" id="designerName" name="designerName" required placeholder="Your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="studioName">Studio Name</label>
+                        <input type="text" id="studioName" name="studioName" placeholder="Your studio or company name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Primary Location *</label>
+                        <input type="text" id="location" name="location" required placeholder="City, State">
+                    </div>
+                </div>
+
+                <!-- Google Visibility Questions -->
+                <div class="form-section">
+                    <h2 class="section-title">Google Visibility (20 points)</h2>
+                    
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">Do you have a Google Business Profile for your interior design studio?</div>
+                            <div class="category-badge">Google</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="gbp_yes" name="google_business" value="5" required>
+                                <label for="gbp_yes" class="radio-label">Yes, claimed and active</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="gbp_partial" name="google_business" value="3">
+                                <label for="gbp_partial" class="radio-label">Yes, but not updated</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="gbp_no" name="google_business" value="0">
+                                <label for="gbp_no" class="radio-label">No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">How many reviews do you have on Google?</div>
+                            <div class="category-badge">Google</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="reviews_many" name="google_reviews" value="5" required>
+                                <label for="reviews_many" class="radio-label">10+ reviews</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="reviews_some" name="google_reviews" value="3">
+                                <label for="reviews_some" class="radio-label">1-9 reviews</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="reviews_none" name="google_reviews" value="0">
+                                <label for="reviews_none" class="radio-label">No reviews</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">Can potential clients find you when searching "interior designer in [your city]"?</div>
+                            <div class="category-badge">Google</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="search_yes" name="google_search" value="5" required>
+                                <label for="search_yes" class="radio-label">Yes, top 3 results</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="search_page1" name="google_search" value="3">
+                                <label for="search_page1" class="radio-label">Yes, first page</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="search_no" name="google_search" value="0">
+                                <label for="search_no" class="radio-label">No / Don't know</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">Have you added photos of your completed projects to Google Business Profile?</div>
+                            <div class="category-badge">Google</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="photos_yes" name="google_photos" value="5" required>
+                                <label for="photos_yes" class="radio-label">Yes, regularly updated</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="photos_some" name="google_photos" value="2">
+                                <label for="photos_some" class="radio-label">A few old photos</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="photos_no" name="google_photos" value="0">
+                                <label for="photos_no" class="radio-label">No photos</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Website/Portfolio Questions -->
+                <div class="form-section">
+                    <h2 class="section-title">Website / Portfolio (20 points)</h2>
+                    
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">Do you have a professional website or online portfolio?</div>
+                            <div class="category-badge">Website</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="website_yes" name="website_exists" value="5" required>
+                                <label for="website_yes" class="radio-label">Yes, professional</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="website_basic" name="website_exists" value="2">
+                                <label for="website_basic" class="radio-label">Basic/outdated</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="website_no" name="website_exists" value="0">
+                                <label for="website_no" class="radio-label">No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">Does your website have clear call-to-action buttons (Book Consultation, Get Quote)?</div>
+                            <div class="category-badge">Website</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="cta_yes" name="website_cta" value="5" required>
+                                <label for="cta_yes" class="radio-label">Yes, prominent</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="cta_hidden" name="website_cta" value="2">
+                                <label for="cta_hidden" class="radio-label">Yes, but hidden</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="cta_no" name="website_cta" value="0">
+                                <label for="cta_no" class="radio-label">No CTA</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">Do you showcase your projects with case studies including budget ranges?</div>
+                            <div class="category-badge">Website</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="portfolio_detailed" name="website_portfolio" value="5" required>
+                                <label for="portfolio_detailed" class="radio-label">Yes, detailed case studies</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="portfolio_basic" name="website_portfolio" value="3">
+                                <label for="portfolio_basic" class="radio-label">Images only</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="portfolio_no" name="website_portfolio" value="0">
+                                <label for="portfolio_no" class="radio-label">No portfolio</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">Is your website mobile-friendly and loads quickly?</div>
+                            <div class="category-badge">Website</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="mobile_yes" name="website_mobile" value="5" required>
+                                <label for="mobile_yes" class="radio-label">Yes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="mobile_partial" name="website_mobile" value="2">
+                                <label for="mobile_partial" class="radio-label">Somewhat</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="mobile_no" name="website_mobile" value="0">
+                                <label for="mobile_no" class="radio-label">No / Don't know</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instagram Questions -->
+                <div class="form-section">
+                    <h2 class="section-title">Instagram Optimization (20 points)</h2>
+                    
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">How often do you post on Instagram?</div>
+                            <div class="category-badge">Instagram</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="insta_freq_high" name="instagram_frequency" value="5" required>
+                                <label for="insta_freq_high" class="radio-label">3+ times/week</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="insta_freq_med" name="instagram_frequency" value="3">
+                                <label for="insta_freq_med" class="radio-label">1-2 times/week</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="insta_freq_low" name="instagram_frequency" value="0">
+                                <label for="insta_freq_low" class="radio-label">Rarely/Never</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">Does your Instagram bio have a clear call-to-action and link?</div>
+                            <div class="category-badge">Instagram</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="insta_bio_yes" name="instagram_bio" value="5" required>
+                                <label for="insta_bio_yes" class="radio-label">Yes, optimized</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="insta_bio_partial" name="instagram_bio" value="2">
+                                <label for="insta_bio_partial" class="radio-label">Has link only</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="insta_bio_no" name="instagram_bio" value="0">
+                                <label for="insta_bio_no" class="radio-label">No CTA or link</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">What's your average engagement rate (likes, comments, saves)?</div>
+                            <div class="category-badge">Instagram</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="insta_engage_high" name="instagram_engagement" value="5" required>
+                                <label for="insta_engage_high" class="radio-label">Good engagement</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="insta_engage_low" name="instagram_engagement" value="2">
+                                <label for="insta_engage_low" class="radio-label">Low engagement</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="insta_engage_none" name="instagram_engagement" value="0">
+                                <label for="insta_engage_none" class="radio-label">No active account</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">Do you use Instagram Stories and Reels to showcase your work?</div>
+                            <div class="category-badge">Instagram</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="insta_stories_yes" name="instagram_stories" value="5" required>
+                                <label for="insta_stories_yes" class="radio-label">Yes, regularly</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="insta_stories_sometimes" name="instagram_stories" value="2">
+                                <label for="insta_stories_sometimes" class="radio-label">Sometimes</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="insta_stories_no" name="instagram_stories" value="0">
+                                <label for="insta_stories_no" class="radio-label">Rarely/Never</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lead Capture Questions -->
+                <div class="form-section">
+                    <h2 class="section-title">Lead Capture System (20 points)</h2>
+                    
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">Do you have a system to capture leads from your website/social media?</div>
+                            <div class="category-badge">Leads</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="lead_system_yes" name="lead_system" value="5" required>
+                                <label for="lead_system_yes" class="radio-label">Yes, automated</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="lead_system_manual" name="lead_system" value="3">
+                                <label for="lead_system_manual" class="radio-label">Manual tracking</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="lead_system_no" name="lead_system" value="0">
+                                <label for="lead_system_no" class="radio-label">No system</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">Do you track where your leads come from (Google, Instagram, referrals)?</div>
+                            <div class="category-badge">Leads</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="lead_track_yes" name="lead_tracking" value="5" required>
+                                <label for="lead_track_yes" class="radio-label">Yes, systematically</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="lead_track_sometimes" name="lead_tracking" value="2">
+                                <label for="lead_track_sometimes" class="radio-label">Sometimes ask</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="lead_track_no" name="lead_tracking" value="0">
+                                <label for="lead_track_no" class="radio-label">Don't track</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">How quickly do you typically respond to new inquiries?</div>
+                            <div class="category-badge">Leads</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="response_fast" name="lead_response" value="5" required>
+                                <label for="response_fast" class="radio-label">Within 1 hour</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="response_day" name="lead_response" value="3">
+                                <label for="response_day" class="radio-label">Same day</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="response_slow" name="lead_response" value="0">
+                                <label for="response_slow" class="radio-label">1+ days</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">Do you use any CRM or tool to manage client inquiries?</div>
+                            <div class="category-badge">Leads</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="crm_yes" name="lead_crm" value="5" required>
+                                <label for="crm_yes" class="radio-label">Yes, dedicated CRM</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="crm_spreadsheet" name="lead_crm" value="2">
+                                <label for="crm_spreadsheet" class="radio-label">Spreadsheet</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="crm_no" name="lead_crm" value="0">
+                                <label for="crm_no" class="radio-label">No tracking</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Follow-up Process Questions -->
+                <div class="form-section">
+                    <h2 class="section-title">Follow-up Process (20 points)</h2>
+                    
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">Do you have a structured follow-up process for leads?</div>
+                            <div class="category-badge">Follow-up</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="followup_system_yes" name="followup_system" value="5" required>
+                                <label for="followup_system_yes" class="radio-label">Yes, automated</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="followup_system_manual" name="followup_system" value="3">
+                                <label for="followup_system_manual" class="radio-label">Manual reminders</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="followup_system_no" name="followup_system" value="0">
+                                <label for="followup_system_no" class="radio-label">No process</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">Do you send proposals or quotes in a standardized format?</div>
+                            <div class="category-badge">Follow-up</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="proposal_yes" name="followup_proposal" value="5" required>
+                                <label for="proposal_yes" class="radio-label">Yes, professional templates</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="proposal_basic" name="followup_proposal" value="2">
+                                <label for="proposal_basic" class="radio-label">Basic format</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="proposal_no" name="followup_proposal" value="0">
+                                <label for="proposal_no" class="radio-label">No standard format</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">Do you track your lead-to-project conversion rate?</div>
+                            <div class="category-badge">Follow-up</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="conversion_yes" name="followup_conversion" value="5" required>
+                                <label for="conversion_yes" class="radio-label">Yes, regularly</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="conversion_rough" name="followup_conversion" value="2">
+                                <label for="conversion_rough" class="radio-label">Rough estimate</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="conversion_no" name="followup_conversion" value="0">
+                                <label for="conversion_no" class="radio-label">Don't track</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-text">How do you stay in touch with past clients?</div>
+                            <div class="category-badge">Follow-up</div>
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="retention_yes" name="followup_retention" value="5" required>
+                                <label for="retention_yes" class="radio-label">Regular newsletters/updates</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="retention_occasional" name="followup_retention" value="2">
+                                <label for="retention_occasional" class="radio-label">Occasional contact</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="retention_no" name="followup_retention" value="0">
+                                <label for="retention_no" class="radio-label">Don't stay in touch</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Calculate My Digital Score
+                </button>
+            </form>
+        </section>
+
+        <!-- Results Section -->
+        <section class="audit-card results" id="results">
+            <div class="score-display">
+                <div class="score-number" id="totalScore">0</div>
+                <div class="score-label">out of 100</div>
+                <div class="ai-badge">
+                    🤖 AI-Analyzed Score
+                </div>
+            </div>
+
+            <div id="scoreInterpretation" style="text-align: center; margin-bottom: 2rem; font-size: 1.1rem; color: var(--text-dim);"></div>
+
+            <div class="category-scores" id="categoryScores"></div>
+
+            <!-- AI-Powered Insights -->
+            <div class="ai-insights">
+                <h3>🎯 AI-Powered Business Insights</h3>
+                <div class="ai-insight-text" id="aiInsightText"></div>
+            </div>
+
+            <!-- Revenue Impact -->
+            <div class="revenue-impact" id="revenueImpact"></div>
+
+            <!-- Gap Analysis -->
+            <div class="gap-analysis">
+                <h3>Where You're Losing Clients</h3>
+                <div id="gapAnalysisList"></div>
+            </div>
+
+            <!-- Comparison: Without vs With DecorRocket -->
+            <div class="comparison-section">
+                <h3>Your Business: Before & After DecorRocket</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Challenge</th>
+                            <th>Current Situation</th>
+                            <th>With DecorRocket</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comparisonBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Benefits Grid -->
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <div class="benefit-title">AI-Powered Automation</div>
+                    <div class="benefit-description">Automate lead capture, follow-ups, and client communication with smart AI tools.</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📊</div>
+                    <div class="benefit-title">Analytics Dashboard</div>
+                    <div class="benefit-description">Track every lead source, conversion rate, and revenue opportunity in real-time.</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎨</div>
+                    <div class="benefit-title">Portfolio Builder</div>
+                    <div class="benefit-description">Create stunning, SEO-optimized portfolios that rank on Google in Hyderabad.</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💬</div>
+                    <div class="benefit-title">Smart CRM</div>
+                    <div class="benefit-description">Never miss a follow-up with automated reminders and proposal tracking.</div>
+                </div>
+            </div>
+
+            <div class="recommendations">
+                <h3>Your Personalized 30-Day Action Plan</h3>
+                <div id="recommendationsList"></div>
+            </div>
+
+            <button class="download-btn" id="downloadBtn">
+                📥 Download Complete Audit Report
+            </button>
+
+            <!-- Registration CTA -->
+            <div class="registration-cta">
+                <h2>Ready to Grow Your Business?</h2>
+                <p>Join 200+ interior designers in Hyderabad who are already using AI to win more clients</p>
+                <button class="register-btn" id="registerBtn">
+                    Start Your Free Trial →
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        console.log('=== SCRIPT TAG REACHED ===');
+        
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        const htmlElement = document.documentElement;
+        
+        // Check for saved theme preference or default to dark
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        htmlElement.setAttribute('data-theme', currentTheme);
+        updateThemeUI(currentTheme);
+        
+        function updateThemeUI(theme) {
+            if (theme === 'light') {
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light';
+            } else {
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark';
+            }
+        }
+        
+        themeToggle.addEventListener('click', function() {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeUI(newTheme);
+            
+            console.log('Theme switched to:', newTheme);
+        });
+        
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded');
+            
+            const form = document.getElementById('auditFormElement');
+            const formSection = document.getElementById('auditForm');
+            const resultsSection = document.getElementById('results');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            console.log('Form element:', form);
+            console.log('Form section:', formSection);
+            console.log('Results section:', resultsSection);
+            
+            if (!form) {
+                console.error('FATAL: Form not found!');
+                return;
+            }
+            
+            console.log('All elements found successfully');
+            
+            // Store form data
+            let formData = {};
+            
+            // Track progress
+            const allRadios = form.querySelectorAll('input[type="radio"]');
+            const radioGroupNames = {};
+            
+            allRadios.forEach(radio => {
+                if (!radioGroupNames[radio.name]) {
+                    radioGroupNames[radio.name] = true;
+                }
+            });
+            
+            const totalGroups = Object.keys(radioGroupNames).length;
+            console.log('Total question groups:', totalGroups);
+            
+            // Update progress bar
+            function updateProgress() {
+                let completed = 0;
+                Object.keys(radioGroupNames).forEach(name => {
+                    const checked = form.querySelector(`input[name="${name}"]:checked`);
+                    if (checked) completed++;
+                });
+                
+                const percentage = (completed / totalGroups) * 100;
+                progressBar.style.width = percentage + '%';
+                progressText.textContent = Math.round(percentage) + '% Complete';
+            }
+            
+            // Add change listeners
+            allRadios.forEach(radio => {
+                radio.addEventListener('change', updateProgress);
+            });
+            
+            // EXPLICIT BUTTON CLICK HANDLER
+            const submitButton = document.getElementById('submitBtn');
+            if (submitButton) {
+                console.log('Submit button found:', submitButton);
+                submitButton.addEventListener('click', function(e) {
+                    console.log('!!! BUTTON CLICKED !!!');
+                    console.log('Event:', e);
+                    
+                    // Check if form is valid
+                    console.log('Form validity:', form.checkValidity());
+                    
+                    // Try to trigger submit manually
+                    if (!form.checkValidity()) {
+                        console.log('Form is INVALID - HTML5 validation blocking submit');
+                        form.reportValidity(); // Show validation messages
+                    } else {
+                        console.log('Form is VALID - should submit');
+                    }
+                });
+            } else {
+                console.error('Submit button not found!');
+            }
+            
+            // Form submission
+            console.log('Adding submit event listener to form...');
+            form.addEventListener('submit', function(e) {
+                console.log('!!! SUBMIT EVENT FIRED !!!');
+                e.preventDefault();
+                console.log('>>> FORM SUBMITTED <<<');
+                
+                // Collect form data
+                formData = {
+                    designerName: document.getElementById('designerName').value,
+                    studioName: document.getElementById('studioName').value || 'N/A',
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value || 'N/A',
+                    location: document.getElementById('location').value
+                };
+                
+                console.log('Form data collected:', formData);
+                
+                // Calculate scores
+                const detailedScores = {
+                    google: {
+                        business: parseInt((document.querySelector('input[name="google_business"]:checked') || {value: 0}).value),
+                        reviews: parseInt((document.querySelector('input[name="google_reviews"]:checked') || {value: 0}).value),
+                        search: parseInt((document.querySelector('input[name="google_search"]:checked') || {value: 0}).value),
+                        photos: parseInt((document.querySelector('input[name="google_photos"]:checked') || {value: 0}).value)
+                    },
+                    website: {
+                        exists: parseInt((document.querySelector('input[name="website_exists"]:checked') || {value: 0}).value),
+                        cta: parseInt((document.querySelector('input[name="website_cta"]:checked') || {value: 0}).value),
+                        portfolio: parseInt((document.querySelector('input[name="website_portfolio"]:checked') || {value: 0}).value),
+                        mobile: parseInt((document.querySelector('input[name="website_mobile"]:checked') || {value: 0}).value)
+                    },
+                    instagram: {
+                        frequency: parseInt((document.querySelector('input[name="instagram_frequency"]:checked') || {value: 0}).value),
+                        bio: parseInt((document.querySelector('input[name="instagram_bio"]:checked') || {value: 0}).value),
+                        engagement: parseInt((document.querySelector('input[name="instagram_engagement"]:checked') || {value: 0}).value),
+                        stories: parseInt((document.querySelector('input[name="instagram_stories"]:checked') || {value: 0}).value)
+                    },
+                    leads: {
+                        system: parseInt((document.querySelector('input[name="lead_system"]:checked') || {value: 0}).value),
+                        tracking: parseInt((document.querySelector('input[name="lead_tracking"]:checked') || {value: 0}).value),
+                        response: parseInt((document.querySelector('input[name="lead_response"]:checked') || {value: 0}).value),
+                        crm: parseInt((document.querySelector('input[name="lead_crm"]:checked') || {value: 0}).value)
+                    },
+                    followup: {
+                        system: parseInt((document.querySelector('input[name="followup_system"]:checked') || {value: 0}).value),
+                        proposal: parseInt((document.querySelector('input[name="followup_proposal"]:checked') || {value: 0}).value),
+                        conversion: parseInt((document.querySelector('input[name="followup_conversion"]:checked') || {value: 0}).value),
+                        retention: parseInt((document.querySelector('input[name="followup_retention"]:checked') || {value: 0}).value)
+                    }
+                };
+                
+                const categoryScores = {
+                    google: Object.values(detailedScores.google).reduce((a, b) => a + b, 0),
+                    website: Object.values(detailedScores.website).reduce((a, b) => a + b, 0),
+                    instagram: Object.values(detailedScores.instagram).reduce((a, b) => a + b, 0),
+                    leads: Object.values(detailedScores.leads).reduce((a, b) => a + b, 0),
+                    followup: Object.values(detailedScores.followup).reduce((a, b) => a + b, 0)
+                };
+                
+                const totalScore = Object.values(categoryScores).reduce((a, b) => a + b, 0);
+                
+                console.log('Category scores:', categoryScores);
+                console.log('Total score:', totalScore);
+                
+                // Show results
+                displayResults(totalScore, categoryScores, detailedScores);
+            });
+            
+            function displayResults(total, categoryScores, detailedScores) {
+                console.log('>>> DISPLAYING RESULTS <<<');
+                console.log('Total:', total);
+                
+                try {
+                    // Set total score
+                    document.getElementById('totalScore').textContent = total;
+                    
+                    // Score interpretation
+                    let interpretation = '';
+                    let aiInsight = '';
+                    
+                    if (total >= 80) {
+                        interpretation = '🌟 Excellent! You\'re digitally ready for the AI era.';
+                        aiInsight = `Congratulations! You're in the <span class="insight-highlight">top 15%</span> of interior designers in Hyderabad. With DecorRocket's advanced AI tools, you can further optimize your conversion rates by <span class="insight-highlight">20-30%</span> and scale your business efficiently.`;
+                    } else if (total >= 60) {
+                        interpretation = '👍 Good foundation with room for optimization.';
+                        aiInsight = `You have a solid digital presence, but you're leaving money on the table. Based on your score, you could be losing <span class="insight-highlight">₹3-5 lakhs annually</span> in potential projects. DecorRocket's AI tools can help you capture these opportunities.`;
+                    } else if (total >= 40) {
+                        interpretation = '⚠️ Moderate presence - significant growth opportunities ahead.';
+                        aiInsight = `Your digital gaps are costing you serious revenue. Hyderabad interior designers with similar scores typically lose <span class="insight-highlight">₹5-8 lakhs annually</span> to competitors with stronger digital presence. DecorRocket can help you catch up in 30 days.`;
+                    } else {
+                        interpretation = '🚀 High growth potential - time to go digital!';
+                        aiInsight = `You're operating almost invisibly online. In today's AI-driven market, you're likely losing <span class="insight-highlight">₹10+ lakhs annually</span> to digitally-savvy competitors. The good news? DecorRocket can transform your business in 90 days with our proven AI-first approach.`;
+                    }
+                    
+                    document.getElementById('scoreInterpretation').textContent = interpretation;
+                    document.getElementById('aiInsightText').innerHTML = aiInsight;
+                    
+                    // Revenue impact
+                    const potentialLostRevenue = total >= 80 ? 2 : total >= 60 ? 5 : total >= 40 ? 8 : 12;
+                    const missedProjects = Math.ceil(potentialLostRevenue / 3.5);
+                    
+                    document.getElementById('revenueImpact').innerHTML = `
+                        <div class="impact-card">
+                            <div class="impact-number">${missedProjects}</div>
+                            <div class="impact-label">Projects Lost Annually</div>
+                        </div>
+                        <div class="impact-card">
+                            <div class="impact-number">₹${potentialLostRevenue}L</div>
+                            <div class="impact-label">Potential Revenue Loss</div>
+                        </div>
+                        <div class="impact-card">
+                            <div class="impact-number">₹3.5L</div>
+                            <div class="impact-label">Avg. Project Value</div>
+                        </div>
+                    `;
+                    
+                    // Category scores display
+                    const categories = [
+                        { name: 'Google Visibility', key: 'google', max: 20 },
+                        { name: 'Website / Portfolio', key: 'website', max: 20 },
+                        { name: 'Instagram', key: 'instagram', max: 20 },
+                        { name: 'Lead Capture', key: 'leads', max: 20 },
+                        { name: 'Follow-up Process', key: 'followup', max: 20 }
+                    ];
+                    
+                    const categoryScoresDiv = document.getElementById('categoryScores');
+                    categoryScoresDiv.innerHTML = '';
+                    
+                    categories.forEach(cat => {
+                        const score = categoryScores[cat.key];
+                        const percentage = (score / cat.max) * 100;
+                        
+                        categoryScoresDiv.innerHTML += `
+                            <div class="category-score-card">
+                                <div class="category-score-header">
+                                    <div class="category-name">${cat.name}</div>
+                                    <div class="category-score-value">${score}/${cat.max}</div>
+                                </div>
+                                <div class="category-bar">
+                                    <div class="category-bar-fill" style="width: ${percentage}%"></div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    // Gap analysis (simplified version)
+                    const gapsList = document.getElementById('gapAnalysisList');
+                    gapsList.innerHTML = '';
+                    
+                    if (categoryScores.google < 15) {
+                        gapsList.innerHTML += `
+                            <div class="gap-item critical">
+                                <div class="gap-header">
+                                    <div class="gap-title">Invisible on Google Search</div>
+                                    <div class="gap-severity critical">CRITICAL</div>
+                                </div>
+                                <div class="gap-description">When potential clients in Hyderabad search for "interior designer near me," you're not showing up. This is the #1 reason you're losing high-intent leads.</div>
+                                <div class="gap-impact">Losing 40-60% of potential local clients</div>
+                            </div>
+                        `;
+                    }
+                    
+                    if (categoryScores.website < 15) {
+                        gapsList.innerHTML += `
+                            <div class="gap-item ${categoryScores.website < 8 ? 'critical' : 'moderate'}">
+                                <div class="gap-header">
+                                    <div class="gap-title">Weak Online Portfolio</div>
+                                    <div class="gap-severity ${categoryScores.website < 8 ? 'critical' : 'moderate'}">${categoryScores.website < 8 ? 'CRITICAL' : 'MODERATE'}</div>
+                                </div>
+                                <div class="gap-description">Your website isn't converting visitors into leads. Missing clear CTAs, budget ranges, and compelling case studies means clients can't imagine working with you.</div>
+                                <div class="gap-impact">Losing 50-70% of website visitors without inquiry</div>
+                            </div>
+                        `;
+                    }
+                    
+                    if (categoryScores.leads < 15) {
+                        gapsList.innerHTML += `
+                            <div class="gap-item ${categoryScores.leads < 8 ? 'critical' : 'moderate'}">
+                                <div class="gap-header">
+                                    <div class="gap-title">Broken Lead Management</div>
+                                    <div class="gap-severity ${categoryScores.leads < 8 ? 'critical' : 'moderate'}">${categoryScores.leads < 8 ? 'CRITICAL' : 'MODERATE'}</div>
+                                </div>
+                                <div class="gap-description">You're not capturing leads systematically and respond too slowly. In Hyderabad's competitive market, speed wins.</div>
+                                <div class="gap-impact">70% of leads going cold due to slow response</div>
+                            </div>
+                        `;
+                    }
+                    
+                    // Comparison table
+                    const comparisonBody = document.getElementById('comparisonBody');
+                    comparisonBody.innerHTML = `
+                        <tr>
+                            <td><strong>Local visibility</strong></td>
+                            <td><span class="cross-icon">✗</span> Not showing up in Google searches</td>
+                            <td><span class="check-icon">✓</span> Rank #1-3 for "interior designer Hyderabad"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Website conversions</strong></td>
+                            <td><span class="cross-icon">✗</span> 2-3% of visitors inquire</td>
+                            <td><span class="check-icon">✓</span> 12-15% conversion with AI-optimized CTAs</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Response time</strong></td>
+                            <td><span class="cross-icon">✗</span> Several hours to 2 days</td>
+                            <td><span class="check-icon">✓</span> Instant automated responses 24/7</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lead tracking</strong></td>
+                            <td><span class="cross-icon">✗</span> Spreadsheets or memory</td>
+                            <td><span class="check-icon">✓</span> Smart CRM with analytics dashboard</td>
+                        </tr>
+                    `;
+                    
+                    // Recommendations
+                    const recommendations = [];
+                    
+                    if (categoryScores.google < 15) {
+                        recommendations.push({
+                            icon: '🗺️',
+                            text: '<strong>Week 1-2: Dominate Local Search</strong><br>Claim and optimize your Google Business Profile with DecorRocket\'s AI-powered local SEO tools.'
+                        });
+                    }
+                    
+                    if (categoryScores.website < 15) {
+                        recommendations.push({
+                            icon: '🌐',
+                            text: '<strong>Week 2-3: Build Converting Portfolio</strong><br>Use DecorRocket\'s portfolio builder to create SEO-optimized case studies with budget ranges.'
+                        });
+                    }
+                    
+                    if (categoryScores.leads < 15) {
+                        recommendations.push({
+                            icon: '🎯',
+                            text: '<strong>Week 1: Implement Smart Lead Capture</strong><br>Activate DecorRocket\'s AI chatbot for instant 24/7 responses.'
+                        });
+                    }
+                    
+                    recommendations.push({
+                        icon: '🤖',
+                        text: '<strong>Ongoing: AI-Powered Growth</strong><br>Let DecorRocket\'s AI analyze your data weekly and suggest optimizations.'
+                    });
+                    
+                    const recList = document.getElementById('recommendationsList');
+                    recList.innerHTML = '';
+                    recommendations.forEach(rec => {
+                        recList.innerHTML += `
+                            <div class="recommendation-item">
+                                <div class="recommendation-icon">${rec.icon}</div>
+                                <div class="recommendation-text">${rec.text}</div>
+                            </div>
+                        `;
+                    });
+                    
+                    // Hide form, show results
+                    console.log('Hiding form...');
+                    formSection.style.display = 'none';
+                    
+                    console.log('Showing results...');
+                    resultsSection.style.display = 'block';
+                    resultsSection.classList.add('visible');
+                    
+                    // Scroll to results
+                    setTimeout(() => {
+                        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 200);
+                    
+                    console.log('>>> RESULTS DISPLAYED SUCCESSFULLY <<<');
+                    
+                } catch (error) {
+                    console.error('ERROR in displayResults:', error);
+                    alert('Error displaying results. Please check console.');
+                }
+            }
+            
+            // Download button
+            document.getElementById('downloadBtn').addEventListener('click', function() {
+                const totalScore = document.getElementById('totalScore').textContent;
+                alert(`📥 Complete Audit Report Ready!
+
+Your Digital Audit Report:
+━━━━━━━━━━━━━━━━━━
+Designer: ${formData.designerName}
+Studio: ${formData.studioName}
+Score: ${totalScore}/100
+
+Ready to fix these gaps? Click "Start Your Free Trial" below! 🚀`);
+            });
+            
+            // Registration button
+            document.getElementById('registerBtn').addEventListener('click', function() {
+                const totalScore = document.getElementById('totalScore').textContent;
+                alert(`🎉 Welcome to DecorRocket!
+
+Great decision, ${formData.designerName}!
+Your Current Score: ${totalScore}/100
+
+Special Offer for Hyderabad Designers:
+💰 ₹2,999/month (₹9,999 value)
+🎁 Free setup + training
+📱 3 months free WhatsApp support
+
+We'll email you at ${formData.email} with next steps!`);
+            });
+            
+        }); // End DOMContentLoaded
+    </script>
+</body>
+</html>
