@@ -2,84 +2,66 @@
 
 AI-powered digital audit platform for interior designers in Hyderabad.
 
-## Files
+## 📁 Files
 
-- `index.html` - Main application file
-- `vercel.json` - Vercel deployment configuration
+- `index.html` - Landing page (choose audit type)
+- `wizard.html` - Wizard-style 6-step audit (RECOMMENDED)
+- `single-page.html` - Single-page traditional audit
+- `vercel.json` - Vercel configuration
 - `package.json` - Project metadata
 
-## Deployment to Vercel
+## 🚀 Quick Deploy to Vercel
 
-### Option 1: GitHub Integration (Recommended)
-
-1. **Push these files to your GitHub repository:**
-   ```bash
-   git add index.html vercel.json package.json .gitignore
-   git commit -m "Add Vercel deployment files"
-   git push origin main
-   ```
-
-2. **In Vercel Dashboard:**
-   - Go to your project settings
-   - Make sure the **Root Directory** is set to `.` (or leave empty)
-   - **Framework Preset**: Select "Other"
-   - **Build Command**: Leave empty
-   - **Output Directory**: Leave empty or set to `.`
-   - Click "Deploy"
-
-### Option 2: Vercel CLI
-
-1. Install Vercel CLI:
-   ```bash
-   npm i -g vercel
-   ```
-
-2. Deploy:
-   ```bash
-   vercel
-   ```
-
-### Option 3: Manual Upload
-
-1. Go to [vercel.com](https://vercel.com)
-2. Click "New Project"
-3. Drag and drop your folder containing `index.html`
-
-## File Structure
-
-```
-your-repo/
-├── index.html          # Main application
-├── vercel.json         # Vercel config
-├── package.json        # Project metadata
-├── .gitignore         # Git ignore file
-└── README.md          # This file
+### 1. Push to GitHub
+```bash
+git add .
+git commit -m "Add DecorRocket audit platform"
+git push origin main
 ```
 
-## Troubleshooting
+### 2. Deploy on Vercel
+- Go to vercel.com
+- Click "New Project"
+- Import your GitHub repo
+- Click "Deploy"
 
-### 404 Error
-- Make sure `index.html` is in the root directory
-- Check that `vercel.json` is present
-- Verify **Root Directory** in Vercel settings is `.` or empty
+Done! ✅
 
-### Deployment Not Updating
-- Clear Vercel cache and redeploy
-- Check the deployment logs in Vercel dashboard
+## 📊 Features
 
-## Features
+### Wizard Audit (Recommended)
+- 6-step guided process
+- Progress tracker showing 0-20 questions
+- Visual step indicators
+- Animated transitions
+- Mobile optimized
 
-- ✅ Dark/Light theme toggle
-- ✅ 20-question digital audit
-- ✅ AI-powered insights
-- ✅ Gap analysis
-- ✅ Revenue impact calculator
-- ✅ Personalized recommendations
-- ✅ Mobile responsive
+### Single Page Audit
+- All 20 questions at once
+- Quick completion
+- Traditional layout
 
-## Tech Stack
+## 🎯 Audit Categories
 
-- Pure HTML/CSS/JavaScript
-- Google Fonts (Poppins + Inter)
-- LocalStorage for theme persistence
-- No build process required
+1. Google Visibility (4 questions)
+2. Website/Portfolio (4 questions)
+3. Instagram (4 questions)
+4. Lead Capture (4 questions)
+5. Follow-up Process (4 questions)
+
+**Total**: 100 points
+
+## 📱 Fully Responsive
+
+Works perfectly on:
+- Desktop computers
+- Tablets
+- Mobile phones
+
+## 🎨 Theme Toggle
+
+Dark/Light mode with persistence
+
+## 📄 License
+
+MIT - Free to use
