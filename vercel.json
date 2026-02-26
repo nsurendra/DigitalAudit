@@ -2,14 +2,25 @@
   "version": 2,
   "builds": [
     {
-      "src": "index.html",
+      "src": "*.html",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/",
       "dest": "/index.html"
+    },
+    {
+      "src": "/wizard",
+      "dest": "/wizard.html"
+    },
+    {
+      "src": "/single-page",
+      "dest": "/single-page.html"
+    },
+    {
+      "handle": "filesystem"
     }
   ]
 }
